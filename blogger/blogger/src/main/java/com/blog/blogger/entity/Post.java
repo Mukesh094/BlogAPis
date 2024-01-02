@@ -1,0 +1,29 @@
+package com.blog.blogger.entity;
+
+
+import lombok.*;
+
+
+import javax.persistence.*;
+import javax.persistence.Table;
+import java.util.*;
+
+
+@Entity
+@Table(name="posts")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Post {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long id;
+    private String title;
+    private String description;
+    private String content;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval =true)
+    private List<Comment> comments = new ArrayList<>();
+
+
+}
